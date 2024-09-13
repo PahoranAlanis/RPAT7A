@@ -24,11 +24,11 @@ def alumnosGuardar():
 @app.route("/evento")
 def evento():
     pusher_client = pusher.Pusher(
-        app_id='1864239',
-        key='bf61a78167d9920c3d07',
-        secret='1251ee86c94608366b0a',
-        cluster='us2',
+        app_id="1864239",
+        key="bf61a78167d9920c3d07",
+        secret="1251ee86c94608366b0a",
+        cluster="us2",
         ssl=True
     )
     
-    pusher_client.trigger("conexion", "evento", {"message": "hello world"})
+    pusher_client.trigger("conexion", "evento", {"txtTemperatura": 35, "txtHumedad": 0.6, "dpFechaHora": "2024-09-12 20:13:00"})
