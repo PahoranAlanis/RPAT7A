@@ -56,7 +56,7 @@ def registrar():
     cursor = con.cursor()
     
     sql = "INSERT INTO tst0_usuarios (Nombre_Usuario, Contrasena) VALUES (%s, %s)"
-    val = (args["txtusuario"], args["txtcontrasena"]))
+    val = (args["txtusuario"], args["txtcontrasena"])
     cursor.execute(sql, val)
 
     con.commit()
