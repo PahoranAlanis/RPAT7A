@@ -18,12 +18,12 @@
           <input type="hidden" id="id" name="id">
 
           <div class="mb-1">
-              <label for="temperatura">Temperatura</label>
-              <input type="number" id="temperatura" name="temperatura" class="form-control">
+              <label for="usuario">Usuario</label>
+              <input type="text" id="usuario" name="usuario" class="form-control">
           </div>
           <div class="mb-1">
-              <label for="humedad">Humedad</label>
-              <input type="number" id="humedad" name="humedad" class="form-control">
+              <label for="contrasena">Contrasena</label>
+              <input type="text" id="contrasena" name="contrasena" class="form-control">
           </div>
           <div class="mb-1">
               <button id="guardar" name="guardar" class="btn btn-dark">Guardar</button>
@@ -33,10 +33,8 @@
       <table class="table table-sm">
         <thead>
           <tr>
-            <th>Temperatura</th>
-            <th>Humedad</th>
-            <th>Fecha</th>
-            <th>Hora</th>
+            <th>Usuario</th>
+            <th>Contrasena</th>
             <th></th>
           </tr>
         </thead>
@@ -133,10 +131,8 @@
                         }
 
                         $("#tbodyTemperaturaHumedad").append(`<tr>
-                            <td>${temperaturaHumedad["Temperatura"]}</td>
-                            <td>${temperaturaHumedad["Humedad"]}</td>
-                            <td>${fecha}</td>
-                            <td>${temperaturaHumedad["Hora"]}</td>
+                            <td>${temperaturaHumedad["Usuario"]}</td>
+                            <td>${temperaturaHumedad["Contrasena"]}</td>
                             <td>
                                 <button class="btn btn-primary btn-editar" data-id="${temperaturaHumedad["Id_Log"]}">Editar</button>
                                 <button class="btn btn-danger btn-eliminar" data-id="${temperaturaHumedad["Id_Log"]}">Eliminar</button>
@@ -159,8 +155,8 @@
                     .val(temperaturaHumedad["Id_Log"])
                     .trigger("focus")
 
-                    $("#temperatura").val(temperaturaHumedad["Temperatura"])
-                    $("#humedad").val(temperaturaHumedad["Humedad"])
+                    $("#usuario").val(temperaturaHumedad["Usario"])
+                    $("#contrasena").val(temperaturaHumedad["Contrasena"])
                 })
             })
             
