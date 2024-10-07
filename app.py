@@ -45,7 +45,7 @@ def alumnosGuardar():
     return f"Matrícula {matricula} Nombre y Apellido {nombreapellido}"
 
 # Código usado en las prácticas
-def notificarActualizacionTemperaturaHumedad():
+def notificarActualizacionUsuario():
     pusher_client = pusher.Pusher(
         app_id="1864239",
         key="bf61a78167d9920c3d07",
@@ -63,8 +63,8 @@ def buscar():
 
     cursor = con.cursor(dictionary=True)
     cursor.execute("""
-    SELECT Id_Log, Temperatura, Humedad, DATE_FORMAT(Fecha_Hora, '%d/%m/%Y') AS Fecha, DATE_FORMAT(Fecha_Hora, '%H:%i:%s') AS Hora FROM sensor_log
-    ORDER BY Id_Log DESC
+    SELECT Id_Usuario, Nombre_Usuario, Contrasena FROM tst0_usuarios
+    ORDER BY Id_Usuario DESC
     LIMIT 10 OFFSET 0
     """)
     registros = cursor.fetchall()
@@ -79,32 +79,31 @@ def guardar():
         con.reconnect()
 
     id          = request.form["id"]
-    temperatura = request.form["temperatura"]
-    humedad     = request.form["humedad"]
-    fechahora   = datetime.datetime.now(pytz.timezone("America/Matamoros"))
+    usuario = request.form["usuario"]
+    contrasena     = request.form["contrasena"]
     
     cursor = con.cursor()
 
     if id:
         sql = """
-        UPDATE sensor_log SET
-        Temperatura = %s,
-        Humedad     = %s
-        WHERE Id_Log = %s
+        UPDATE tst0_usuarios SET
+        Nombre_Usuario = %s,
+        Contrasena     = %s
+        WHERE Id_Usuario = %s
         """
-        val = (temperatura, humedad, id)
+        val = (usuario, contrasena, id)
     else:
         sql = """
-        INSERT INTO sensor_log (Temperatura, Humedad, Fecha_Hora)
-                        VALUES (%s,          %s,      %s)
+        INSERT INTO tst0_usuarios (Nombre_Usuario, Contrasena)
+                        VALUES (%s,          %s)
         """
-        val =                  (temperatura, humedad, fechahora)
+        val =                  (usuario, contrasena)
     
     cursor.execute(sql, val)
     con.commit()
     con.close()
 
-    notificarActualizacionTemperaturaHumedad()
+    notificarActualizacionUsuario()
 
     return make_response(jsonify({}))
 
@@ -117,8 +116,8 @@ def editar():
 
     cursor = con.cursor(dictionary=True)
     sql    = """
-    SELECT Id_Log, Temperatura, Humedad FROM sensor_log
-    WHERE Id_Log = %s
+    SELECT Id_Usuario, Nombre_Usuario, Contrasena FROM tst0_usuarios
+    WHERE Id_Usuario = %s
     """
     val    = (id,)
 
@@ -137,8 +136,8 @@ def eliminar():
 
     cursor = con.cursor(dictionary=True)
     sql    = """
-    DELETE FROM sensor_log
-    WHERE Id_Log = %s
+    DELETE FROM tst0_usuarios
+    WHERE Id_Usuario = %s
     """
     val    = (id,)
 
@@ -146,6 +145,6 @@ def eliminar():
     con.commit()
     con.close()
 
-    notificarActualizacionTemperaturaHumedad()
+    notificarActualizacionUsuario()
 
     return make_response(jsonify({}))
