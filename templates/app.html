@@ -117,8 +117,6 @@
                 $.get("/buscar", function (respuesta) {
                     $("#tbodyTemperaturaHumedad").html("")
 
-                    var fechaAnterior = ""
-
                     for (var x in respuesta) {
                         var temperaturaHumedad = respuesta[x]
 
@@ -147,7 +145,7 @@
                     .val(temperaturaHumedad["Id_Usuario"])
                     .trigger("focus")
 
-                    $("#usuario").val(temperaturaHumedad["Usario"])
+                    $("#usuario").val(temperaturaHumedad["Nombre_Usuario"])
                     $("#contrasena").val(temperaturaHumedad["Contrasena"])
                 })
             })
