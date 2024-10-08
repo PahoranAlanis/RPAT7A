@@ -122,20 +122,12 @@
                     for (var x in respuesta) {
                         var temperaturaHumedad = respuesta[x]
 
-                        var fecha = ""
-                        var fechaTemp = temperaturaHumedad["Fecha"]
-
-                        if (fechaAnterior != fechaTemp) {
-                            fecha         = fechaTemp
-                            fechaAnterior = fechaTemp
-                        }
-
                         $("#tbodyTemperaturaHumedad").append(`<tr>
                             <td>${temperaturaHumedad["Usuario"]}</td>
                             <td>${temperaturaHumedad["Contrasena"]}</td>
                             <td>
-                                <button class="btn btn-primary btn-editar" data-id="${temperaturaHumedad["Id_Log"]}">Editar</button>
-                                <button class="btn btn-danger btn-eliminar" data-id="${temperaturaHumedad["Id_Log"]}">Eliminar</button>
+                                <button class="btn btn-primary btn-editar" data-id="${temperaturaHumedad["Id_Usuario"]}">Editar</button>
+                                <button class="btn btn-danger btn-eliminar" data-id="${temperaturaHumedad["Id_Usuario"]}">Eliminar</button>
                             </td>
                         </tr>`)
                     }
